@@ -1,12 +1,12 @@
 import './App.css';
-import ItemsList from './components/ItemsList';
+import Items from './components/Items';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>Do it!</h1>
-        <ItemsList />
+        <Items />
       </header>
       <footer className="App-footer">
         <p>2023 Portsmouth</p>
