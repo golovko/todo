@@ -1,13 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Header({ stateUpdate, tasks }) {
-  const [text, setText] = useState('Add Task');
-  const [sorting, setSorting] = useState('default');
+  const [text, setText] = useState("Add Task");
+  const [sorting, setSorting] = useState("default");
   const key = () => crypto.randomUUID();
   const [id, setId] = useState(key());
 
   function handleAddTask() {
-
     let tempArr = [...tasks];
     tempArr.unshift({
       created: new Date(),
@@ -15,8 +14,8 @@ export default function Header({ stateUpdate, tasks }) {
       text: text,
       status: false,
     });
-    itemsSorting(stateUpdate, sorting, tempArr)
-    setText('');
+    itemsSorting(stateUpdate, sorting, tempArr);
+    setText("");
     setId(key());
   }
 
@@ -26,25 +25,29 @@ export default function Header({ stateUpdate, tasks }) {
         <input
           key={id}
           type="text"
-          placeholder='Add Task'
+          placeholder="Add Task"
           onChange={(e) => setText(e.target.value)}
           size={30}
-          onKeyDown={(e) => (e.key === 'Enter' ? handleAddTask() : null)}
+          onKeyDown={(e) => (e.key === "Enter" ? handleAddTask() : null)}
         />
-        <button onClick={() => {
-          handleAddTask()}}>
+        <button
+          onClick={() => {
+            handleAddTask();
+          }}
+        >
           Add
         </button>
       </div>
-      <div className='box'>
+      <div className="box">
         <label className="item">Sorting by: </label>
-        <select 
-          name="sorting" 
-          defaultValue={sorting} 
-          onChange={e=>{
-          setSorting(e.target.value);
-          itemsSorting(stateUpdate, e.target.value, tasks);
-        }}>
+        <select
+          name="sorting"
+          defaultValue={sorting}
+          onChange={(e) => {
+            setSorting(e.target.value);
+            itemsSorting(stateUpdate, e.target.value, tasks);
+          }}
+        >
           <option value="default">default</option>
           <option value="status">status</option>
           <option value="age">age</option>
@@ -52,27 +55,26 @@ export default function Header({ stateUpdate, tasks }) {
         </select>
       </div>
     </>
-  )
+  );
 }
 
-function itemsSorting(stateUpdate, sorting, arr){
+function itemsSorting(stateUpdate, sorting, arr) {
   let tempArr = [...arr];
-  if(sorting === 'age'){
+  if (sorting === "age") {
     tempArr.sort((a, b) => {
       return a.created - b.created;
-    })
-  } else if(sorting === 'name'){
-    tempArr.sort((a,b) => 
-    (a.text.toLowerCase()>b.text.toLowerCase()) ? 1 : -1);
-  } else if(sorting === 'status'){
-    tempArr.sort((a,b) => a.status - b.status);
-  } if(sorting === 'default'){
+    });
+  } else if (sorting === "name") {
+    tempArr.sort((a, b) =>
+      a.text.toLowerCase() > b.text.toLowerCase() ? 1 : -1
+    );
+  } else if (sorting === "status") {
+    tempArr.sort((a, b) => a.status - b.status);
+  }
+  if (sorting === "default") {
     tempArr.sort((a, b) => {
       return a.id - b.id;
-    })
+    });
   }
   stateUpdate(tempArr);
 }
-
-
-
