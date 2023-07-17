@@ -66,7 +66,7 @@ function itemsSorting(stateUpdate, sorting, arr) {
   let tempArr = [...arr];
   if (sorting === "age") {
     tempArr.sort((a, b) => {
-      return a.created - b.created;
+      return new Date(a.createdAt) - new Date(b.createdAt);
     });
   } else if (sorting === "name") {
     tempArr.sort((a, b) =>
@@ -77,7 +77,7 @@ function itemsSorting(stateUpdate, sorting, arr) {
   }
   if (sorting === "default") {
     tempArr.sort((a, b) => {
-      return a.id - b.id;
+      return a.id > b.id ? 1 : -1;
     });
   }
   stateUpdate(tempArr);
