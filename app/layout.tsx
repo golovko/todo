@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Provider from "./components/Provider";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
+import SessionProvider from "./components/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,26 +12,29 @@ export const metadata: Metadata = {
   description: "next.js demo todo app",
 };
 
-export default function RootLayout({
-  children,
+export default function RootLayout(
+  {
+  children, 
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <Provider>
+        <SessionProvider>
         <body className={inter.className}>
           <div className="App">
             <header className="app-header">
               <Navbar />
             </header>
-            <main className="main">{children}</main>
+            <main className="main">{children}</main> 
             <footer className="app-footer">
-              <Footer/>
+              <Footer />
             </footer>
           </div>
         </body>
-      </Provider>
+        </SessionProvider>
+
     </html>
   );
 }
+

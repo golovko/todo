@@ -23,6 +23,7 @@ export default function Item({ passedTasks, stateUpdate, text }) {
     tempArr.forEach((el) => {
       if (el.id === task.id) {
         el.status = !el.status;
+        delete el.createdAt;
         return;
       }
     });
@@ -55,7 +56,11 @@ export default function Item({ passedTasks, stateUpdate, text }) {
             type="text"
             value={element.content}
             disabled={element.status}
-            onBlur={() => saveTask({ task: element, method: "PUT" })}
+            onBlur={() => {
+              delete element.createdAt; 
+              saveTask({ task: element, method: "PUT" })
+              }
+            }
             onChange={(e) => {
               handleEditTask(element, e.target.value, tempArr);
             }}
