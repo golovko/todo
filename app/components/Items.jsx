@@ -13,7 +13,8 @@ export default function Items() {
     const fetchTasks = async () => {
       const response = await fetch("./api/tasks");
       const data = await response.json();
-      setTasks(data);
+      if(response.status == 200){setTasks(data);
+      }
     };
     fetchTasks();
   }, []);

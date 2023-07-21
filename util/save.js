@@ -1,9 +1,10 @@
-const saveTask = async function ({ user, task, method }) {
-  console.log(task);
+import { getSession } from "next-auth/react";
 
+const saveTask = async function ({ user, task, method }) {
   switch (method) {
     case "POST":
       await fetch("/api/tasks", {
+        credentials: "include",
         method: method,
         headers: {
           Accept: "application/json",

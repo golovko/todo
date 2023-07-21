@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import saveTask from "util/save";
+import { useSession, getSession } from "next-auth/react";
 
 export default function Header({ stateUpdate, tasks }) {
+  const { data: session, status } = useSession();
   const [text, setText] = useState("Add Task");
   const [sorting, setSorting] = useState("default");
   const key = () => crypto.randomUUID();
@@ -15,8 +17,17 @@ export default function Header({ stateUpdate, tasks }) {
       content: text,
       status: false,
     };
-    saveTask({task:task, method:"POST"});
+    delete task.createdAt;
+
+    if(session){
+      task.authorId = session.user.id;
+      saveTask({ task: task, method: "POST" });
+    } else {
+      task.authorId = "demoUser";
+      saveTask({ task: task, method: "POST" });
+    }
     task.id = id;
+    task.createdAt = Date();
     tempArr.unshift(task);
     itemsSorting(stateUpdate, sorting, tempArr);
     setText("");
@@ -25,23 +36,28 @@ export default function Header({ stateUpdate, tasks }) {
 
   return (
     <>
-      <div>
-        <input
-          key={id}
-          type="text"
-          placeholder="Add Task"
-          onChange={(e) => setText(e.target.value)}
-          size={30}
-          onKeyDown={(e) => (e.key === "Enter" ? handleAddTask() : null)}
-        />
-        <button
-          onClick={() => {
-            handleAddTask();
-          }}
-        >
-          Add
-        </button>
-      </div>
+      <form>
+        <div className="relative">
+          <input
+            onKeyDown={(e) => (e.key === "Enter" ? handleAddTask() : null)}
+            onChange={(e) => setText(e.target.value)}
+            key={id}
+            type="text"
+            className="add-task"
+            placeholder="Add new task"
+            required
+          />
+          <button
+            type="submit"
+            className="button"
+            onClick={() => {
+              handleAddTask();
+            }}
+          >
+            + Add
+          </button>
+        </div>
+      </form>
       <div className="box">
         <label className="item">Sorting by: </label>
         <select

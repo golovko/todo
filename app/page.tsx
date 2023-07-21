@@ -1,20 +1,16 @@
-import Image from 'next/image';
-import Items from './components/Items'
-import Navbar from './components/Navbar'
+import Image from "next/image";
+import Items from "./components/Items";
 
 export default function Home() {
   return (
-    <div className="App">
-      <Navbar />
-      <header className="App-header">
-        <h1>ToDo it!</h1>
-      </header>
-      <main>
-      <Items />
-      </main>
-      <footer className="App-footer">
-        <p>2023 Portsmouth</p>
-      </footer>
+    <div >
+        <div className="h1">
+          {" "}
+          <h1 className="head_text text-center">
+            <span className="blue_gradient">ToDo it!</span>
+          </h1>
+        </div>
+        <Items />
     </div>
-  )
+  );
 }

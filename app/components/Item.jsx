@@ -5,6 +5,7 @@ import saveTask from "util/save";
 
 export default function Item({ passedTasks, stateUpdate, text }) {
   let tempArr = [...passedTasks];
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
 
   function handleEditTask(task, e, tasks) {
     tempArr = [...tasks];
@@ -39,12 +40,14 @@ export default function Item({ passedTasks, stateUpdate, text }) {
   let item = tempArr.map((element) => {
     return (
       <tr key={element.id} className="item">
-        <td>
-          <input
+        <td><div className="flex items-center">
+          <input 
             type="checkbox"
+            className="checkbox"
             checked={element.status}
             onChange={(e) => handleCheckTask(tempArr, element)}
           />
+          </div>
         </td>
         <td>
           <input
@@ -59,9 +62,9 @@ export default function Item({ passedTasks, stateUpdate, text }) {
             size={30}
           />
         </td>
-        <td>{element.createdAt}</td>
+        <td>{new Date(element.createdAt).toLocaleDateString('en-GB', options)}</td>
         <td>
-          <button onClick={(e) => handleDeleteTask(element)}>❌ Delete</button>
+          <button  onClick={(e) => handleDeleteTask(element)}>❌ Delete</button>
         </td>
       </tr>
     );

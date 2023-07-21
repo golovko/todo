@@ -1,68 +1,168 @@
-*{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
   margin: 0;
   box-sizing: border-box;
 }
+
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  max-width: 640px;
+  background-image: radial-gradient(
+      at 27% 37%,
+      hsla(215, 98%, 61%, 1) 0px,
+      transparent 0%
+    ),
+    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  top: 80px;
+  opacity: 0.15;
+}
+
+.blue_gradient {
+  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+}
+
 .App {
   background-color: #282c34;
-  text-align: center;
 }
 
-.App-header {
-  min-height: 150px;
-  display: flex;
-  flex-direction: column;
+.app-header {
+  flex-direction: row;
   align-items: center;
-  justify-content:center;
-  font-size: calc(6px + 2vmin);
+  justify-content:space-around;
+  font-size: calc(4px + 1,2vmin);
   color: white;
 }
 
-main {
-  min-height: calc(100vh - 250px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  font-size: calc(6px + 2vmin);
-  color: white;
+.navbar {
+  @apply flex justify-between items-center w-full mb-16 pt-2;
+  background-color: #b5c8eb;
+  padding: 6px 22px;
 }
 
-.item {
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 140px;
+}
+
+.textblock{
+  @apply block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  border-radius: 12px;
+  border: none;
+  padding: 25px;;
+}
+
+.head_text {
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+  padding-bottom: 60px;
+}
+
+#item {
   font-size: calc(6px + 1vmin);
 }
 
-
 .box {
   padding-top: 5vh;
-  padding-bottom: 2vh ;
+  padding-bottom: 2vh;
   display: flex;
-  align-items: center;
-  justify-content:end;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
-.App-footer {
-  align-items: end;
+.app-footer {
+  display: flex;
   padding: 0px;
   margin: 0px;
   color: aliceblue;
   height: 100px;
   font-size: calc(6px + 1vmin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.table {
+  @apply w-full text-sm text-left text-gray-500 dark:text-gray-400;
 }
 
-.table-header, th {
-  font-size: medium;
-  padding: 4px;
-  background-color: #2e333d;
-  border-style: none;
-
+.table th {
+  @apply px-6 py-3;
 }
 
-.navbar {
- background-color:#b5c8eb;
- width: 100wv;
+.table thead{
+ @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+}
 
+.table tbody {
+  @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+}
+
+.table td {
+  @apply w-4 p-4;
+}
+
+.table tr {
+  @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+}
+
+.table-header th {
+  @apply p-4;
+}
+
+.checkbox {
+  @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
+}
+
+.table input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid rgb(100, 125, 170);
+}
+
+.button {
+  @apply bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded;
+}
+
+form button{
+  @apply text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+}
+
+.add-task {
+  @apply block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+
+label {
+ @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+}
+
+select {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+
+.logo_text {
+  @apply max-sm:hidden font-semibold text-lg text-black tracking-wide;
+}
+
+.red {
+  color: brown;
+  padding: 8px;
 }

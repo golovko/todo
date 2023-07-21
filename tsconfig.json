@@ -23,6 +23,6 @@
       "@/*": ["./app/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/users/users.js", "app/api/tasks/tasks.js", "lib/prisma.ts", "pages/api/tasks/[id].js", "pages/api/users/[id].js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/users/users.js", "app/api/tasks/tasks.js", "lib/prisma.ts", "pages/api/tasks/[id].js", "pages/api/users/[id].js", "app/layout.tsx", "app/profile/page.js"],
   "exclude": ["node_modules"]
 }
