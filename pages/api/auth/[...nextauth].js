@@ -9,6 +9,7 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
      async session({ session, user, token }) {
       const sessionUser = await prisma.user.findUnique({
@@ -42,7 +43,6 @@ export default NextAuth({
         return false;
       }
     },
-    secret: process.env.NEXTAUTH_SECRET,
   },
 });
 
