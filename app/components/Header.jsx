@@ -24,7 +24,7 @@ export default function Header({ stateUpdate, tasks }) {
       saveTask({ task: task, method: "POST" });
     } else {
       task.authorId = "demoUser";
-      saveTask({ task: task, method: "POST" });
+      // saveTask({ task: task, method: "POST" });
     }
     task.id = id;
     task.createdAt = Date();
